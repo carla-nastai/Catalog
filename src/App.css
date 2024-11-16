@@ -1,38 +1,155 @@
-.App {
-  text-align: center;
+
+body {
+  background-color: #6C584C;
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+.container {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+/* Header and Navigation */
+.header-nav-container {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  padding: 10px 20px;
+  background-color: #A98467;
+  border-radius: 12px;
+  margin: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.App-link {
-  color: #61dafb;
+.header {
+  font-size: 24px;
+  color: #F0EAD2;
+  font-weight: 600;
+  letter-spacing: 1px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.nav {
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px; /* Adjusted spacing between the links in the header */
+}
+
+.nav a {
+  color: #F0EAD2;
+  text-decoration: none;
+  font-weight: bold;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+/* Adding more space between the nav links */
+.nav a:not(:last-child) {
+  margin-right: 20px; /* Add spacing between links in the nav */
+}
+
+.nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #F0EAD2;
+  transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.nav a:hover::after {
+  width: 100%;
+  background-color: #4a5843;
+}
+
+.nav a:hover {
+  color: #4a5843;
+}
+
+/* Hamburger Menu */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+}
+
+.hamburger div {
+  width: 25px;
+  height: 3px;
+  background-color: #F0EAD2;
+}
+
+/* Sidebar Menu */
+.nav-menu {
+  display: none; /* Hidden by default */
+  flex-direction: column;
+  gap: 20px; /* Add space between links in the sidebar */
+  background-color: #A98467;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 250px;
+  height: 100vh;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 30;
+}
+
+.nav-menu.open {
+  display: flex; /* Show on open */
+}
+
+.nav-menu a {
+  color: #F0EAD2;
+  text-decoration: none;
+  font-weight: bold;
+  margin-bottom: 20px; /* Add space between sidebar links */
+}
+
+/* Hide main menu on mobile */
+.main-nav-menu {
+  display: flex;
+}
+
+@media (max-width: 768px) {
+  .main-nav-menu {
+    display: none; /* Hide desktop menu */
   }
-  to {
-    transform: rotate(360deg);
+
+  .hamburger {
+    display: flex; /* Show hamburger on mobile */
+  }
+
+  .nav-menu {
+    display: flex; /* Show sidebar menu on mobile */
+    transform: translateX(100%);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  .nav-menu.open {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  .backdrop {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    z-index: 20;
+  }
+
+  .backdrop.active {
+    display: block;
   }
 }
