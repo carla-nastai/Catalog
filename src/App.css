@@ -1,15 +1,20 @@
 
+
 body {
-  background-color: #6C584C;
-  font-family: sans-serif;
+  background-color: #6C584C;  /* Background color for the page */
+  font-family: sans-serif;  /* Global font */
   margin: 0;
   padding: 0;
+  color: #F0EAD2;  /* Text color */
 }
 
+/* Full height container */
 .container {
+  background-color: #6C584C;  /* Background for the container */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  padding: 20px;
 }
 
 /* Header and Navigation */
@@ -18,9 +23,9 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  background-color: #A98467;
+  background-color: #A98467;  /* Header background color */
   border-radius: 12px;
-  margin: 20px;
+  margin-bottom: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -34,7 +39,7 @@ body {
 .nav {
   display: flex;
   justify-content: flex-end;
-  gap: 20px; /* Adjusted spacing between the links in the header */
+  gap: 20px; /* Adjusted spacing between the links */
 }
 
 .nav a {
@@ -45,9 +50,9 @@ body {
   transition: color 0.3s ease;
 }
 
-/* Adding more space between the nav links */
+/* Space between nav links */
 .nav a:not(:last-child) {
-  margin-right: 20px; /* Add spacing between links in the nav */
+  margin-right: 20px;
 }
 
 .nav a::after {
@@ -88,7 +93,7 @@ body {
 .nav-menu {
   display: none; /* Hidden by default */
   flex-direction: column;
-  gap: 20px; /* Add space between links in the sidebar */
+  gap: 20px;
   background-color: #A98467;
   position: absolute;
   top: 0;
@@ -111,22 +116,26 @@ body {
   margin-bottom: 20px; /* Add space between sidebar links */
 }
 
-/* Hide main menu on mobile */
+/* Main navigation menu - visible on larger screens */
 .main-nav-menu {
   display: flex;
 }
 
+/* Mobile Styles */
 @media (max-width: 768px) {
+  /* Hide desktop menu */
   .main-nav-menu {
-    display: none; /* Hide desktop menu */
+    display: none;
   }
 
+  /* Show hamburger icon on mobile */
   .hamburger {
-    display: flex; /* Show hamburger on mobile */
+    display: flex;
   }
 
+  /* Sidebar for mobile view */
   .nav-menu {
-    display: flex; /* Show sidebar menu on mobile */
+    display: flex;
     transform: translateX(100%);
     opacity: 0;
     transition: transform 0.3s ease, opacity 0.3s ease;
@@ -137,6 +146,7 @@ body {
     opacity: 1;
   }
 
+  /* Backdrop for mobile menu */
   .backdrop {
     display: none;
     position: fixed;

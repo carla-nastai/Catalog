@@ -1,9 +1,9 @@
-body {
-  font-family: 'Arial', sans-serif;
-  background-color: #F9F9F9; /* Ensure the page has a consistent background */
+/* Global Reset */
+* {
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* Content container to ensure proper layout */
 .content {
   display: flex;
   justify-content: space-between;
@@ -11,6 +11,7 @@ body {
   gap: 20px; /* Add gap between form and messages */
 }
 
+/* Form container */
 .form-container {
   width: 45%; /* Ensures the form takes up less space */
   background-color: #A98467; /* Background color for the form container */
@@ -22,14 +23,14 @@ body {
 .form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 30px; /* Increased gap between form elements */
   width: 100%;
 }
 
 .form h2 {
   color: #F0EAD2;
   text-align: center;
-  margin-bottom: 20px; /* Added margin for spacing */
+  margin-bottom: 30px; /* Increased margin for more space below the header */
 }
 
 .form label {
@@ -39,7 +40,7 @@ body {
   display: block;
 }
 
-.form input, .form textarea {
+.form input, .message {
   padding: 10px;
   border-radius: 5px;
   border: none;
@@ -51,13 +52,13 @@ body {
   width: 100%;
 }
 
-.form textarea {
-  height: 150px; /* Added height for textarea */
+.message {
+  height: 150px; 
+  resize: vertical; /* Allow vertical resizing */
 }
 
-.form input:focus, .form textarea:focus {
-  outline: none;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2), 0 0 8px #4a5843;
+.form input:hover, .message:hover {
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1), 0 0 8px #4a5843;
   transform: translateY(-2px);
 }
 
@@ -90,23 +91,115 @@ body {
 .messages-container h2 {
   color: #4a5843;
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 50px; /* Increased margin for more space below the header */
 }
 
 .message-card {
   background-color: #E9F1F7;
   padding: 10px;
-  margin-bottom: 15px;
+  margin-bottom: 20px; /* Increased margin between message cards */
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .message-card p {
   margin: 0;
-  color: #54426B;
+  color: #4a5843;
   font-size: 14px;
 }
 
+.message-card:hover {
+  background-color: #ecccb4;
+  cursor: pointer;
+}
+
+/* Modal styling */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal {
+  background-color:#f9f7ef;
+  padding: 30px;
+  border-radius: 8px;
+  width: 600px; /* Make the modal wider */
+  max-width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.modal h3 {
+  color:#6C584C; /* Dark brown text color */
+}
+
+.modal p {
+  margin: 10px 0;
+  color:#6C584C /* Dark brown text color */
+}
+
+.modal button {
+  background-color: #4a5843;
+  color: #F0EAD2;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.modal button:hover {
+  background-color: #6C584C;
+  transform: translateY(-2px);
+}
+
+/* Close button styling (X) */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  color:#6C584C;
+  font-size: 24px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.close-btn:hover {
+  color: #6C584C;
+}
+
+/* Respond button styling */
+.respond-btn {
+  background-color: #6C584C; /* Lighter brown */
+  color: #F0EAD2;
+  border: none;
+  padding: 12px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+  font-weight: bold;
+  margin-top: 20px; /* Add space between the message content and the button */
+  width: 100%;
+}
+
+.respond-btn:hover {
+  background-color: #4a5843; /* Darker brown on hover */
+  transform: translateY(-2px);
+}
+.modal-label{
+  color:#6C584C;
+}
 /* Sidebar styling */
 .sidebar {
   width: 200px;
