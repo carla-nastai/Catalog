@@ -1,0 +1,115 @@
+/* General Event Styles */
+.event {
+  position: relative;
+  padding: 8px;
+  color: #F0EAD2; /* Light cream text color */
+  border-radius: 5px;
+  cursor: move;
+  transition: background-color 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  font-weight: bold;
+  z-index: 10;
+  word-wrap: break-word;
+  text-align: center;
+}
+
+.event:hover {
+  background-color: #4CAF50; /* Change color on hover */
+}
+
+/* Timetable container */
+.timetable-container {
+  margin: 20px;
+}
+
+/* Table header */
+.header-table {
+  display: grid;
+  grid-template-columns: 80px repeat(7, 1fr);
+  grid-gap: 5px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.header-cell {
+  padding: 10px;
+  background-color: #A98467;
+  color: #F0EAD2;
+}
+
+.body {
+  grid-template-columns: 80px repeat(7, 1fr);
+  grid-gap: 5px;
+  grid-template-rows: repeat(24, 1fr);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 80px repeat(7, 1fr);
+  grid-gap: 5px;
+}
+
+.hour-cell {
+  background-color: #A98467;
+  color: #F0EAD2;
+  padding: 10px;
+  text-align: center;
+}
+
+.cell {
+  position: relative;
+  border: 1px solid #ccc;
+  background-color: #E9F1F7;
+  padding: 10px;
+  min-height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+
+.cell:hover {
+  background-color: #D0E0F0; /* Light blue on hover */
+}
+
+.selected {
+  background-color: rgba(0, 128, 0, 0.3); /* Highlight selected cell */
+}
+
+/* Form Styling */
+.form {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #F0EAD2;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: none;
+}
+
+.form input {
+  margin-bottom: 10px;
+  padding: 8px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.form button {
+  margin-right: 5px;
+  padding: 8px 16px;
+  background-color: #2196F3;
+  color: #F0EAD2;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.form button:hover {
+  background-color: #1976D2;
+}
