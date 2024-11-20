@@ -6,13 +6,22 @@ const ContactProfesor = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [messages, setMessages] = useState([]); // State to store submitted messages
   const [showMessageModal, setShowMessageModal] = useState(false);
   const [showRespondModal, setShowRespondModal] = useState(false);
   const [selectedMessage, setSelectedMessage] = useState(null);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Handle form submission logic here
+    // Add the new message to the messages array
+    setMessages((prevMessages) => [
+      ...prevMessages,
+      { name, email, message },
+    ]);
+    // Clear the form fields
+    setName('');
+    setEmail('');
+    setMessage('');
   };
 
   const handleMessageClick = (msg) => {
@@ -33,23 +42,12 @@ const ContactProfesor = () => {
     setShowRespondModal(false);
   };
 
-  // Handle sending response and closing both modals
   const handleSendResponse = (event) => {
     event.preventDefault();
-    // Here, you would normally handle the sending of the response
     console.log('Response sent to:', selectedMessage.email);
-    
-    // Close both modals after sending the response
     setShowMessageModal(false);
     setShowRespondModal(false);
   };
-
-  // Temporary messages
-  const messages = [
-    { name: 'Student A', email: 'studentA@email.com', message: 'Can you please clarify the assignment details?' },
-    { name: 'Student B', email: 'studentB@email.com', message: 'I need help with the last homework.' },
-    { name: 'Student C', email: 'studentC@email.com', message: 'Do we have a test next week?' },
-  ];
 
   return (
     <div className="content">
@@ -125,7 +123,7 @@ const ContactProfesor = () => {
             <button className="close-btn" onClick={handleCloseRespondModal}>X</button>
             <h3>Respond to {selectedMessage.name}</h3>
             <form onSubmit={handleSendResponse}>
-              <label className ="modal-label">
+              <label className="modal-label">
                 To:
                 <input
                   type="email"
@@ -134,7 +132,7 @@ const ContactProfesor = () => {
                   disabled
                 />
               </label>
-              <label className ="modal-label">
+              <label className="modal-label">
                 Your Response:
                 <textarea
                   className="message"
