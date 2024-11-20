@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route, Link, Navigate } from 'react-ro
 import Home from './Home';
 import ContactProfesor from './ContactProfesor';
 import Login from './Login';
+import Timetable from './Timetable';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -52,6 +53,7 @@ function App() {
           <Route path="/login" element={<Login onLogin={handleLogin} />} />
           <Route path="/" element={isLoggedIn ? <Home /> : <Navigate to="/login" />} />
           <Route path="/contact-profesor" element={isLoggedIn ? <ContactProfesor /> : <Navigate to="/login" />} />
+          <Route path="/orar" element={isLoggedIn ? <Timetable /> : <Navigate to="/login" />} />
         </Routes>
       </div>
     </Router>
