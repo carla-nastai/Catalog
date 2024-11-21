@@ -1,0 +1,42 @@
+/* Notification.css */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #f44336; /* Red background for error */
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px; /* Set the size of the X button */
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center; /* Vertically center the button */
+    justify-content: center; /* Horizontally center the button */
+    width: 30px;  /* Define a fixed width for the button */
+    height: 30px; /* Define a fixed height for the button */
+    border-radius: 50%; /* Make it circular */
+    padding: 0;   /* Remove any padding */
+  }
+  
+  .close-btn:hover {
+    color: #ddd;
+    background-color: rgba(0, 0, 0, 0.1); /* Optional background effect on hover */
+  }
+  
+  .notification span {
+    flex-grow: 1;
+    margin-right: 2rem; /* Add some space between the message and the close button */
+  }
+  

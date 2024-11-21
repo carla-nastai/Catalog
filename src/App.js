@@ -31,7 +31,7 @@ function App() {
   }, []);
 
   if (isLoggedIn === null) {
-    // While checking the login status from localStorage, don't render routes yet
+    // Don't load the page before checking the login status from localStorage
     return <div>Loading...</div>;
   }
 
