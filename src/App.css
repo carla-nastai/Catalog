@@ -75,6 +75,41 @@ body {
   color: #4a5843;
 }
 
+.nav button {
+  color: #F0EAD2;
+  background: transparent;
+  border: transparent;
+  text-decoration: none;
+  font-weight: bold;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+/* Space between nav links */
+.nav button:not(:last-child) {
+  margin-right: 20px;
+}
+
+.nav button::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #F0EAD2;
+  transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.nav button:hover::after {
+  width: 100%;
+  background-color: #4a5843;
+}
+
+.nav button:hover {
+  color: #4a5843;
+}
+
 /* Hamburger Menu */
 .hamburger {
   display: none;
