@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDrag, useDrop, DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import './Timetable.css';
@@ -14,7 +14,7 @@ const hours = [
   '12 PM', '1 PM', '2 PM', '3 PM', '4 PM', '5 PM', '6 PM', '7 PM', '8 PM', '9 PM', '10 PM'
 ];
 
-const DraggableEvent = ({ id, content, duration, color, onClick, hour }) => {
+const DraggableEvent = ({ id, content, duration, color, onClick }) => {
   const [{ isDragging }, drag] = useDrag(() => ({
     type: ItemTypes.EVENT,
     item: { id },
@@ -23,7 +23,7 @@ const DraggableEvent = ({ id, content, duration, color, onClick, hour }) => {
     }),
   }));
 
-  const eventDurationInPixels = duration * 50; // Adjust height based on the duration (50px per hour)
+  const eventDurationInPixels = duration * 50; // Ajustăm înălțimea bazată pe durata (50px pe oră)
 
   return (
     <div
@@ -32,7 +32,12 @@ const DraggableEvent = ({ id, content, duration, color, onClick, hour }) => {
       style={{
         opacity: isDragging ? 0.5 : 1,
         height: `${eventDurationInPixels}px`,
+        lineHeight: `${eventDurationInPixels}px`, // Centrare pe verticală
         backgroundColor: color,
+        position: 'absolute', // Evenimentul trebuie să aibă poziție absolută în cadrul celulei
+        top: 0, // Începe din partea superioară
+        left: 0, // Începe din partea stângă
+        width: '100%', // Ocupă întreaga lățime a celulei
       }}
       onClick={() => onClick(id)}
     >
@@ -40,6 +45,7 @@ const DraggableEvent = ({ id, content, duration, color, onClick, hour }) => {
     </div>
   );
 };
+
 
 const DroppableCell = ({ children, onDrop, onClick }) => {
   const [, drop] = useDrop(() => ({
@@ -52,6 +58,50 @@ const DroppableCell = ({ children, onDrop, onClick }) => {
       {children}
     </div>
   );
+};
+
+const saveTableState = async (events) => {
+  const userEmail = localStorage.getItem('email'); // Email-ul utilizatorului din localStorage
+
+  if (!userEmail) {
+    console.error('User email not found in localStorage');
+    return;
+  }
+
+  try {
+    await fetch('http://localhost:5000/api/table-state', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ user_email: userEmail, table_state: events }),
+    });
+  } catch (error) {
+    console.error('Error saving table state:', error);
+  }
+};
+
+const loadTableState = async () => {
+  const userEmail = localStorage.getItem('email'); // Email-ul utilizatorului din localStorage
+
+  if (!userEmail) {
+    console.error('User email not found in localStorage');
+    return {};
+  }
+
+  try {
+    const response = await fetch(`http://localhost:5000/api/table-state?user_email=${userEmail}`);
+    if (response.ok) {
+      const data = await response.json();
+      return data || {};
+    } else {
+      console.error('Error loading table state');
+      return {};
+    }
+  } catch (error) {
+    console.error('Error loading table state:', error);
+    return {};
+  }
 };
 
 const Timetable = () => {
@@ -67,39 +117,55 @@ const Timetable = () => {
     color: '#2196F3',
   });
 
+  // Încarcă starea tabelului la montarea componentei
+  useEffect(() => {
+    const fetchTableState = async () => {
+      const loadedEvents = await loadTableState();
+      setEvents(loadedEvents);
+    };
+    fetchTableState();
+  }, []);
+
   const moveEvent = (id, newDay, newHour) => {
-    setEvents((prevEvents) => ({
-      ...prevEvents,
-      [id]: { ...prevEvents[id], day: newDay, hour: newHour },
-    }));
+    setEvents((prevEvents) => {
+      const updatedEvents = {
+        ...prevEvents,
+        [id]: { ...prevEvents[id], day: newDay, hour: newHour },
+      };
+      saveTableState(updatedEvents); // Salvează modificarea
+      return updatedEvents;
+    });
   };
 
   const addEvent = () => {
     const newId = `event-${Object.keys(events).length + 1}`;
-    setEvents((prevEvents) => ({
-      ...prevEvents,
-      [newId]: newEvent,
-    }));
+    setEvents((prevEvents) => {
+      const updatedEvents = {
+        ...prevEvents,
+        [newId]: newEvent,
+      };
+      saveTableState(updatedEvents); // Salvează adăugarea
+      return updatedEvents;
+    });
     resetEventForm();
   };
 
-  const editEvent = (id) => {
-    setEditingEvent(id);
-    setNewEvent(events[id]);
-    setModalVisible(true);
-  };
-
   const updateEvent = () => {
-    setEvents((prevEvents) => ({
-      ...prevEvents,
-      [editingEvent]: newEvent,
-    }));
+    setEvents((prevEvents) => {
+      const updatedEvents = {
+        ...prevEvents,
+        [editingEvent]: newEvent,
+      };
+      saveTableState(updatedEvents); // Salvează actualizarea
+      return updatedEvents;
+    });
     resetEventForm();
   };
 
   const deleteEvent = (id) => {
     setEvents((prevEvents) => {
       const { [id]: _, ...rest } = prevEvents;
+      saveTableState(rest); // Salvează ștergerea
       return rest;
     });
     resetEventForm();
@@ -124,8 +190,11 @@ const Timetable = () => {
   };
 
   const handleEventClick = (id) => {
-    editEvent(id);
+    setEditingEvent(id); // Setează ID-ul evenimentului care urmează să fie editat
+    setNewEvent(events[id]); // Populează formularul cu datele evenimentului selectat
+    setModalVisible(true); // Deschide modalul de editare
   };
+  
 
   return (
     <DndProvider backend={HTML5Backend}>

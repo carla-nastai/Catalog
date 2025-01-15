@@ -23,7 +23,9 @@ const Login = ({ onLogin }) => {
       const data = await response.json();
 
       if (response.ok) {
-        onLogin(); // Notify parent component of successful login
+        // Pass email to parent component
+        onLogin(data.email);
+        localStorage.setItem('email', data.email); // Store email in localStorage
         navigate('/'); // Redirect to the Home page
       } else {
         setError(data.message || 'Login failed');
@@ -32,6 +34,10 @@ const Login = ({ onLogin }) => {
       console.error('Error:', err);
       setError('Unable to connect to the server');
     }
+  };
+
+  const goToSignIn = () => {
+    navigate('/signin'); // Redirect to the Sign In page
   };
 
   return (
@@ -60,6 +66,7 @@ const Login = ({ onLogin }) => {
           />
         </label>
         <button type="submit" className="login-button">Login</button>
+        <button onClick={goToSignIn} className="signin-button">Sign In</button>
       </form>
     </div>
   );

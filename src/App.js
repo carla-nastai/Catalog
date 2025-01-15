@@ -5,19 +5,22 @@ import Home from './Home';
 import ContactProfesor from './ContactProfesor';
 import Login from './Login';
 import Timetable from './Timetable';
+import SignIn from './Signin';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(null); // Set initial state to null
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const handleLogin = () => {
+  const handleLogin = (email) => {
     setIsLoggedIn(true);
     localStorage.setItem('isLoggedIn', 'true');
+    localStorage.setItem('email', email); // Store email in localStorage
   };
 
   const handleLogout = () => {
     setIsLoggedIn(false);
     localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('email');
   };
 
   useEffect(() => {
@@ -73,6 +76,7 @@ function App() {
 
         <Routes>
           <Route path="/login" element={<Login onLogin={handleLogin} />} />
+          <Route path="/signin" element={<SignIn />} />
           <Route path="/" element={isLoggedIn ? <Home /> : <Navigate to="/login" />} />
           <Route path="/contact-profesor" element={isLoggedIn ? <ContactProfesor /> : <Navigate to="/login" />} />
           <Route path="/orar" element={isLoggedIn ? <Timetable /> : <Navigate to="/login" />} />
