@@ -240,7 +240,7 @@ const Home = () => {
         {!isStudent && (
           <div>
             <label htmlFor="emailSelect">Select Email: </label>
-            <select
+            <select class="select_bar"
               id="emailSelect"
               value={selectedEmail}
               onChange={handleEmailChange}
@@ -287,7 +287,7 @@ const Home = () => {
                   ))}
                   {!isStudent && (
                     <td>
-                      <button
+                      <button class="del_button"
                         onClick={() => handleDeleteRow(rowIndex)}
                         style={{ color: "red" }}
                       >

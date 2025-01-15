@@ -82,7 +82,6 @@ const Signin = () => {
       type="checkbox"
       checked={isStudent}
       onChange={(e) => setIsStudent(e.target.checked)}
-      required
     />
     Are you a student?
   </label>

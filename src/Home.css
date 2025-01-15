@@ -41,6 +41,54 @@
   margin-left: 20px;
 }
 
+.del_button {
+  width: 100%;
+  background-color: #4a5843; /* Button color */
+  color: #f0ead2;
+  border: none;
+  padding: 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.del_button:hover {
+  background-color: #6c584c;
+  transform: scale(1.05); /* Scale up the input on hover */
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+}
+
+.del_button:focus {
+  outline: none;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2), 0 0 8px #4a5843;
+}
+
+.select_bar {
+  width: 100%;
+  background-color: #4a5843; /* Button color */
+  color: #f0ead2;
+  border: none;
+  padding: 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.select_bar:hover {
+  background-color: #6c584c;
+  transform: scale(1.05); /* Scale up the input on hover */
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+}
+
+.select_bar:focus {
+  outline: none;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2), 0 0 8px #4a5843;
+}
+
 .table-container {
   background-color: #a98467; /* Container background color for the table */
   padding: 20px;
